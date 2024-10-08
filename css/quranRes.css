@@ -1,0 +1,95 @@
+/*Tablete Responsive*/
+@media (min-width: 600px) and (max-width: 1024px) {
+    body {
+        background-size: 1200px 500px; /* Adjust background size for tablets */
+    }
+
+    h1 {
+        margin: 20px;
+        padding: 8px;
+        font-size: 40px; /* Reduce font size for tablets */
+    }
+
+    .search {
+        margin: 100px 50px; /* Adjust margins for the search box */
+        padding: 15px 15px 40px 15px;
+    }
+
+    .sel {
+        width: 90%; /* Expand fields to fit tablet screens */
+        margin: auto;
+    }
+
+    .m1 {
+        margin: 40px auto; /* Center the text */
+        font-size: 24px; /* Adjust font size for tablets */
+        transform: scale(1.2); /* Reduce scaling */
+    }
+
+    audio {
+        margin-top: 30px;
+        width: 100%; /* Ensure full-width audio element */
+    }
+
+    .search div {
+        flex-direction: column; /* Stack elements vertically for tablets */
+        align-items: center;
+    }
+
+    .search input[type="text"] {
+        width: 100%; /* Full width for input fields on tablets */
+    }
+
+    .sel select, .sel input[type="text"], .sel button {
+        flex: 1;
+        padding: 8px; /* Adjust padding for fields */
+    }
+}
+
+/* Responsive design for mobile screens */
+/* استجابة لعرض الشاشة أقل من 768px (للهواتف المحمولة) */
+@media (max-width: 768px) {
+    body {
+        background-size: cover; /* اجعل الخلفية تتناسب مع حجم الشاشة */
+    }
+
+    /* تنسيق صندوق البحث ليكون مرنًا على الشاشات الصغيرة */
+    .search {
+        margin: 20px 10px; /* تقليل الهوامش لتناسب الشاشة */
+        padding: 15px; /* تقليل الحواف */
+    }
+
+    /* تنسيق الحقول */
+    .sel {
+        width: 100%; /* اجعل الحقول تأخذ العرض الكامل */
+        margin: 10px auto;
+    }
+
+    .sel label {
+        font-size: 16px; /* تقليل حجم النص */
+    }
+
+    .sel select, 
+    .sel input[type="text"] {
+        width: 100%; /* جعل الحقول تأخذ العرض الكامل */
+        padding: 8px; /* تقليل الحشو */
+        border-radius: 20px; /* تقليل انحناء الزوايا */
+    }
+
+    .sel button {
+        height: 35px; /* تقليل حجم الأزرار */
+        width: 35px;
+    }
+
+    /* تكوين النصوص لتتناسب مع الشاشات الصغيرة */
+    .m1 {
+        margin: 50px 20px 20px; /* تقليل الهوامش */
+        font-size: 20px; /* تقليل حجم الخط */
+        letter-spacing: 2px; /* تقليل التباعد بين الحروف */
+        transform: scale(1.2); /* تقليل التكبير */
+    }
+    
+    audio {
+        width: 100%; /* اجعل مشغل الصوت يأخذ العرض الكامل */
+    }
+}

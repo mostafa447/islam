@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Broadcast</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../imgs/live_ico/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../imgs/live_ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../imgs/live_ico/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="stylesheet" href="../css/navEn.css">
+    <link rel="stylesheet" href="../css/navResEn.css">
+    <link rel="stylesheet" href="../css/live.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="../js/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<body dir="ltr">
+    <div class="navbar-container">
+        <div class="DropDwonMenu">
+            <div class="menu-toggle">
+                <input type="checkbox" id="menu-check">
+                <label for="menu-check" class="menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+            </div>
+            <br>
+            <nav class="navbar">
+                <ul class="nav-links">
+                    <li class="nav-link services" id="quran">
+                        <a href="../en/quran.html">Quran
+                            <span class="material-icons dropdown-icon"></span>
+                        </a>
+                        <ul class="drop-down drop-down-quran"></ul>
+                    </li>
+                    <li class="nav-link">
+                        <a href="../en/live.html" style="color: red; position: relative;">
+                            Live Broadcast
+                            <span class="red-dot"></span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="../en/radio.html" style="color: red; position: relative;">
+                            <div class="radio-container">
+                                
+                                <span class="radio-waves">
+                                    <span class="circle"></span>
+                                    <span class="wave"></span>
+                                    <span class="wave wave2"></span>
+                                    <span class="wave wave3"></span>
+                                </span>
+                                <span class="radio-text">Radio</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-link services" id="language">
+                        <a>Language
+                            <span class="material-icons dropdown-icon">arrow_drop_down</span>
+                        </a>
+                        <ul class="drop-down drop-down-language">
+                            <li><a href="../ar/live.html">Arabic</a></li>
+                            <li>English</li>
+                        </ul>
+                    </li>
+                    <div class="mode">
+                        <span class="change">
+                            <img src="../imgs/moon.png" alt="Moon">
+                        </span>
+                    </div>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    
+    <div class="live-container">
+        <a href="../en/live.html" class="live-link">
+            <span class="red-dotv2"></span>
+            Live Broadcast
+        </a>
+    
+    <hr color="red">
+
+        <div class="live_video">
+            <span class="white-button">
+                <a href="javascript:void()" id="quran-link" onclick="playlive('https://win.holol.com/live/quran/playlist.m3u8')">Holy Quran Channel</a>
+            </span>
+
+            <span class="white-button">
+                <a href="javascript:void()" id="sunnah-link" onclick="playlive('https://win.holol.com/live/sunnah/playlist.m3u8')">sunnah channel</a>
+            </span>
+
+            <video controls id="livevideo">
+                <source src="" type="video/mp4">
+                <source src="" type="video/ogg">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+    
+    <script src="../js/main.js"></script>
+    <script src="../js/live.js"></script>
+    <script src="../js/hide.js"></script>
+</body>
+</html>

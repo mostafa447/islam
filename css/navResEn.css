@@ -1,0 +1,212 @@
+/* التأثير عند التحويم على العناصر التي تحتوي على دروب داون في شاشات الكمبيوتر */
+@media (min-width: 1024px) {
+    .services:hover .drop-down {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+/* إعدادات دروب داون للموبايل والتابلت */
+@media (max-width: 1023px) {
+    .services a {
+        display: flex;
+        align-items: center;
+        cursor: pointer; /* تغيير المؤشر عند النقر */
+    }
+
+    .services a .drop-down {
+        display: none; /* إخفاء القائمة في الوضع الافتراضي */
+    }
+    
+    .services a.active .drop-down {
+        display: block; /* إظهار القائمة عند تفعيل الكلاس active */
+    }
+
+    .services a:hover .drop-down,
+    .services a:focus .drop-down,
+    .services a:active .drop-down {
+        visibility: hidden; /* التأثير عند النقر على العناصر في الموبايل */
+    }
+}
+
+/* التأثير عند دوران الأيقونة */
+.services .dropdown-icon {
+    font-size: 18px;
+    position: relative;
+    right: -5px;
+    transform: rotate(0deg); /* الوضع الطبيعي للأيقونة */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* عند دوران الأيقونة */
+.services .dropdown-icon.rotated {
+    transform: rotate(180deg); /* دوران الأيقونة بزاوية 180 درجة */
+}
+
+/* تخصيصات إضافية للعرض على الهواتف المحمولة والأجهزة اللوحية */
+@media only screen and (max-width: 768px) {
+    /* Adjust general layout for tablet view */
+    body {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .navbar, .navbardark {
+        padding: 0.5rem 1rem; /* Reduce padding for smaller screens */
+        font-size: 16px; /* Slightly smaller font size for tablet */
+    }
+
+    .nav-links {
+        gap: 1rem; /* Reduce the gap between nav links */
+        flex-wrap: wrap; /* Allow links to wrap for smaller screen sizes */
+    }
+
+    .nav-link, .drop-down li {
+        padding: 0.5rem 0.5rem; /* Adjust padding */
+        font-size: 14px; /* Adjust font size for better fit */
+    }
+
+    img {
+        height: 35px; /* Adjust image size */
+        width: 35px;
+    }
+
+    .change {
+        width: 35px;
+        margin-left: 5px;
+    }
+
+    .drop-down {
+        font-size: 14px; /* Smaller font size in dropdowns */
+    }
+    
+    /* Adjustments for radio waves and live dot */
+    .radio-waves {
+        margin-left: 2px; /* Reduce margin for better spacing */
+    }
+
+    .circle {
+        width: 6px; /* Reduce circle size */
+        height: 6px;
+    }
+
+    .wave {
+        width: 15px; /* Adjust wave size */
+        height: 15px;
+    }
+
+    .red-dot {
+        width: 6px; /* Smaller dot for live */
+        height: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    
+    .menu-toggle {
+        display: flex;
+        position: absolute;
+    }
+
+    .menu-btn {
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 24px;
+        width: 30px;
+    }
+
+    .menu-btn span {
+        background-color: #000;
+        height: 4px;
+        width: 100%;
+        border-radius: 2px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .dark .menu-btn span {
+        background-color: #fff;
+    }
+
+    #menu-check:checked ~ .menu-btn span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    #menu-check:checked ~ .menu-btn span:nth-child(2) {
+        opacity: 0;
+    }
+
+    #menu-check:checked ~ .menu-btn span:nth-child(3) {
+        transform: translateY(-12px) rotate(-45deg);
+    }
+
+    /* Adjust image size for mobile */
+    img {
+        height: 30px;
+        width: 30px;
+    }
+
+    .navbar , .navbardark {
+        display: none;
+        /* opacity: 0; 
+        transition: opacity 0.5s ease, transform 0.5s ease; 
+        transform: translateY(-20px);  */
+    }
+
+    #menu-check {
+        display: none;
+    }
+
+    /* Make the navbar more compact */
+    .navbar.active, .navbardark.active {
+        top: 30px;
+        padding: 0.3rem 1rem;
+        width: 75%;
+        font-size: 14px; /* Reduce font size for mobile */
+        position: relative;
+        z-index: 1000; /* التأكد من أن القائمة العلوية تظهر فوق العناصر الأخرى */
+        display: inline-flex; /* توسيط العناصر داخل الشريط */
+        /* opacity: 1; 
+        transform: translateY(0);  */
+    }
+
+    /* Adjust the dropdown menu size */
+    .DropDwonMenu {
+        flex-direction: column; /* Stack items vertically */
+        font-size: 16px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    /* Adjust padding and margins */
+    .nav-link, .drop-down li {
+        padding: 0.4rem 0.8rem;
+        font-size: 14px;
+    }
+
+    /* Adjust wave animation size */
+    .wave, .wave.wave2, .wave.wave3 {
+        width: 15px;
+        height: 15px;
+    }
+
+    /* Reduce dot size for live indicator */
+    .red-dot {
+        width: 6px;
+        height: 6px;
+    }
+
+    .circle {
+        width: 6px;
+        height: 6px;
+    }
+
+    /* Adjust the radio waves margin for mobile */
+    .radio-waves {
+        margin-left: 2px; /* Less space between the text and the waves */
+    }
+}

@@ -1,0 +1,79 @@
+@font-face {
+    font-family: 'SegoeIM';
+    src: url(../font/SEGOEUI.TTF);
+    font-style: normal;
+}
+
+* {
+    font-family: SegoeIM;
+}
+
+/* Live Indicator Styles */
+.live-container {
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* يمكنك تعديل الارتفاع حسب الحاجة */
+}
+
+.live-link {
+    color: red;
+    text-decoration: none; /* إزالة الخط السفلي */
+    font-size: 36px; /* حجم النص */
+    font-weight: bold;
+    position: relative;
+    display: inline-flex; /* استخدام flexbox للمحاذاة */
+    align-items: center; /* محاذاة العناصر عمودياً */
+    padding-top: 50px;
+    padding-bottom: 10px;
+}
+
+.live_video {
+    margin: 30px 10px;
+}
+
+.red-dotv2 {
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 71%;
+    left: 100%;
+    margin-left: 5px;
+    transform: translateY(-50%);
+    animation: blink 1s infinite;
+}
+
+
+@keyframes blink {
+    0%, 50%, 100% {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0;
+    }
+}
+
+/* Buttons */
+.white-button a {
+    border: 1px solid rgba(237, 230, 230, 0.75);
+    border-radius: 30px;
+    color: black;
+    padding: 10px 20px 20px;
+    text-decoration: none;
+    display: inline-block;
+    background-color: rgba(237, 230, 230, 0.75); /* الخلفية الافتراضية */
+}
+
+.white-button a.red-background {
+    background-color: red;
+    color: white;
+}
+
+/* Video */
+video {
+    width: 80%;
+    border-radius: 15px;
+    border: 1px solid black;
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../imgs/radio_ico/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../imgs/radio_ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../imgs/radio_ico/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="stylesheet" href="../css/navEn.css">
+    <link rel="stylesheet" href="../css/radioEn.css">
+    <link rel="stylesheet" href="../css/navResEn.css">
+
+    <script src="../js/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<body dir="rtl">
+    <div class="navbar-container">
+        <div class="DropDwonMenu">
+            <div class="menu-toggle">
+                <input type="checkbox" id="menu-check">
+                <label for="menu-check" class="menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+            </div>
+            <br>
+            <nav class="navbar">
+                <ul class="nav-links">
+                    <li class="nav-link services" id="quran">
+                        <a href="../en/quran.html">Quran
+                            <span class="material-icons dropdown-icon"></span>
+                        </a>
+                        <ul class="drop-down drop-down-quran"></ul>
+                    </li>
+                    <li class="nav-link">
+                        <a href="../en/live.html" style="color: red; position: relative;">
+                            Live Broadcast
+                            <span class="red-dot"></span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="../en/radio.html" style="color: red; position: relative;">
+                            <div class="radio-container">
+                                
+                                <span class="radio-waves">
+                                    <span class="circle"></span>
+                                    <span class="wave"></span>
+                                    <span class="wave wave2"></span>
+                                    <span class="wave wave3"></span>
+                                </span>
+                                <span class="radio-text">Radio</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-link services" id="language">
+                        <a>Language
+                            <span class="material-icons dropdown-icon">arrow_drop_down</span>
+                        </a>
+                        <ul class="drop-down drop-down-language">
+                            <li><a href="../ar/radio.html">Arabic</a></li>
+                            <li>English</li>
+                        </ul>
+                    </li>
+                    <div class="mode">
+                        <span class="change">
+                            <img src="../imgs/moon.png" alt="Moon">
+                        </span>
+                    </div>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    
+    <div class="radio-contain">
+        <a href="../en/radio.html" class='live-link'>
+            <div class="radio-container">
+                <span class="radio-text">Radio</span>
+                <span class="radio-waves1">
+                    <span class="circle1"></span>
+                    <span class="wave1"></span>
+                    <span class="wave1 wave2"></span>
+                    <span class="wave1 wave3"></span>
+                </span>
+            </div>
+        </a>
+        <hr color="red">
+        <br><br>
+        <div class="radio">
+            <h1>Holy Quran Radios</h1>
+            <div class="search-wrapper">
+                <input class="search-st" data-search placeholder="Search.." id="search" name="text" type="text">
+            </div>
+            <audio id="audio-player" controls>
+                Your browser does not support the audio element.
+            </audio>
+            <div id="radio-list">
+                <!-- سيتم إضافة الإذاعات هنا -->
+            </div>
+            <template id="radio-template">
+                <div class="radio-item">
+                    <span data-name></span>
+                </div>
+            </template>
+        </div>
+    </div>
+    
+
+    <script src="../js/main.js"></script>
+    <script src="../js/radioEn.js"></script>
+    <script src="../js/hide.js"></script>
+</body>
+</html>

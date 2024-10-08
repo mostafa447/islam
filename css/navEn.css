@@ -1,0 +1,317 @@
+/* Dark Mode Transition */
+body.transition-enabled, nav.transition-enabled, select.transition-enabled, button.transition-enabled, hr.transition-enabled, input.transition-enabled, form.transition-enabled, img.transition-enabled {
+    transition: background-color 0.9s, color 0.9s, border 0.9s;
+}
+
+img {
+    height: 40px;
+    width: 40px;
+}
+
+.mode {
+    float: right;
+}
+
+.change {
+    cursor: pointer;
+    width: 40px;
+    padding: 5px;
+    margin-left: 8px;
+}
+
+/* Dark Mode */
+.dark {
+    background-color: #222;
+    color: #f1f1f1; /* Adjusted color for better contrast */
+}
+
+.navbardark {
+    background-color: #222;
+    color: #f1f1f1;
+}
+
+.selectdark {
+    background-color: #222;
+    color: #f1f1f1;
+}
+
+.btndark {
+    background-color: #222;
+    color: #f1f1f1;
+}
+
+/* Nav bar */
+@font-face {
+    font-family: 'SegoeIM';
+    src: url(../font/SEGOEUI.TTF);
+    font-style: normal;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: SegoeIM;
+}
+
+body {
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.menu-toggle {
+    display: none; /* يظهر في الجوال */
+    position: absolute; /* أو fixed إذا كنت ترغب في أن يبقى الزر في المنتصف أثناء التمرير */
+    top: 6%; /* يضع الزر في مكان مرتفع */
+    left: 50%; /* يضع الزر في منتصف العرض */
+    transform: translate(-50%, -50%); /* ينقل الزر للوسط تمامًا */
+    z-index: 1001; /* يظهر فوق باقي العناصر */
+    width: 50px; /* عرض الزر */
+    height: 50px; /* ارتفاع الزر */
+    background-color: #fff; /* لون خلفية الزر */
+    border-radius: 50%; /* يجعل الزر دائري */
+    justify-content: center; /* لتوسيط المحتوى */
+    align-items: center; /* لتوسيط المحتوى عموديًا */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* إضافة ظل للزر */
+    border: 2px solid #ccc; /* حدود بسيطة حول الزر */
+    transition: background-color 0.3s ease; /* انتقال سلس لتغيير لون الخلفية */
+}
+
+.dark .menu-toggle {
+    box-shadow: 0 2px 10px rgba(183, 180, 180, 0.2); /* إضافة ظل للزر */
+    background-color: #333;
+}
+
+.DropDwonMenu {
+    display: flex;
+    font-size: 18px;
+    height: 100%;
+    width: 100%;
+}
+
+.navbar {
+    margin: 15px auto;
+    width: auto;
+    padding: 0.5rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #000;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(176, 163, 163, 0.885);
+    box-sizing: border-box;
+    backdrop-filter: blur(10px);
+    display: inline-flex; /* لعرض العناصر في خط أفقي */
+    justify-content: center;
+    align-items: center;
+    text-align: left; /* لضمان أن النص يبدأ من اليسار */
+    direction: ltr; /* لجعل الاتجاه من اليسار إلى اليمين */
+}
+
+.navbardark {
+    margin: 15px auto;
+    width: auto;
+    padding: 0.5rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(176, 163, 163, 0.885);
+    box-sizing: border-box;
+    backdrop-filter: blur(10px);
+    display: flex; /* لعرض العناصر في خط أفقي */
+    justify-content: center;
+    align-items: center;
+    text-align: left; /* لضمان أن النص يبدأ من اليسار */
+    direction: ltr; /* لجعل الاتجاه من اليسار إلى اليمين */
+    
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    direction: ltr; /* لجعل الاتجاه من اليسار إلى اليمين */
+}
+
+.nav-link, .drop-down li {
+    list-style: none;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: currentColor;
+    position: relative;
+}
+
+/* إعدادات قائمة الدروب داون لكافة الشاشات */
+.drop-down {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease-in-out;
+    position: absolute; /* تأكد من أن العنصر مطوي بالنسبة للعنصر الحاوي */
+    z-index: 1000; /* تعيين قيمة z-index مرتفعة لجعل القائمة فوق العناصر الأخرى */
+    padding: 0.5rem 0;
+    margin: 0.5rem -0.5rem;
+    background: rgb(255, 255, 255);
+    color: black;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    font-size: 15px;
+}
+
+/* عندما يكون العنصر ظاهراً */
+.drop-down.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.nav-link:hover {
+    background-color: rgb(117, 109, 109);
+    border-radius: 0.5rem;
+    transition: 0.5s;
+}
+
+.services a {
+    display: flex;
+    align-items: center;
+}
+
+.services .dropdown-icon {
+    font-size: 18px;
+    position: relative;
+    right: -5px;
+    transform: rotate(0deg); /* الوضع الطبيعي للأيقونة */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* عند دوران الأيقونة */
+.services .dropdown-icon.rotated {
+    transform: rotate(180deg); /* دوران الأيقونة بزاوية 180 درجة */
+}
+
+
+
+.drop-down li:hover {
+    background-color: rgb(117, 109, 109);
+    border-radius: 0.5rem;
+    transition: 0.5s;
+}
+
+.dark .drop-down {
+    background: #333;
+    color: #e6e6e6;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.dark .nav-link-dark:hover,
+.dark .drop-down li:hover {
+    background-color: rgb(117, 109, 109);
+    border-radius: 0.5rem;
+    transition: 0.5s;
+}
+
+.nav-link-dark:hover {
+    background-color: rgb(117, 109, 109);
+    border-radius: 0.5rem;
+    transition: 0.5s;
+}
+
+/*select*/
+.selectwhite, .btnwhite {
+    background-color: #fff;
+    color: #000;
+}
+
+.selectdark, .btndark {
+    background-color: #222;
+    color: #fff;
+}
+
+/* Dot and Waves for Radio */
+.radio-waves {
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.circle {
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateY(-10%);
+    margin: 1px 1px;
+}
+
+.wave {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 2px solid red;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    animation: wave-animation 1.5s infinite ease-in-out;
+}
+
+.wave.wave2 {
+    width: 30px;
+    height: 30px;
+    animation-delay: 0.2s;
+}
+
+.wave.wave3 {
+    width: 40px;
+    height: 40px;
+    animation-delay: 0.4s;
+}
+
+@keyframes wave-animation {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+}
+
+/* Dot for Live */
+.red-dot {
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-left: 5px;
+    transform: translateY(-50%);
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50%, 100% {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0;
+    }
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listening</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../imgs/quran_ico/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../imgs/quran_ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../imgs/quran_ico/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="stylesheet" href="../css/navEn.css">
+    <link rel="stylesheet" href="../css/navResEn.css">
+    <link rel="stylesheet" href="../css/quranEn.css">
+    <link rel="stylesheet" href="../css/quranRes.css">
+
+    <script src="../js/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+</head>
+<body dir="ltr">
+    <div class="navbar-container">
+        <div class="DropDwonMenu">
+            <div class="menu-toggle">
+                <input type="checkbox" id="menu-check">
+                <label for="menu-check" class="menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+            </div>
+            <br>
+            <nav class="navbar">
+                <ul class="nav-links">
+                    <li class="nav-link services" id="quran">
+                        <a href="../en/quran.html">Quran
+                            <span class="material-icons dropdown-icon"></span>
+                        </a>
+                        <ul class="drop-down drop-down-quran"></ul>
+                    </li>
+                    <li class="nav-link">
+                        <a href="../en/live.html" style="color: red; position: relative;">
+                            Live Broadcast
+                            <span class="red-dot"></span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="../en/radio.html" style="color: red; position: relative;">
+                            <div class="radio-container">
+                                
+                                <span class="radio-waves">
+                                    <span class="circle"></span>
+                                    <span class="wave"></span>
+                                    <span class="wave wave2"></span>
+                                    <span class="wave wave3"></span>
+                                </span>
+                                <span class="radio-text">Radio</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-link services" id="language">
+                        <a>Language
+                            <span class="material-icons dropdown-icon">arrow_drop_down</span>
+                        </a>
+                        <ul class="drop-down drop-down-language">
+                            <li><a href="../ar/quran.html">Arabic</a></li>
+                            <li>English</li>
+                        </ul>
+                    </li>
+                    <div class="mode">
+                        <span class="change">
+                            <img src="../imgs/moon.png" alt="Moon">
+                        </span>
+                    </div>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <br>
+    
+    <center>
+        <a href="../en/quran.html"><h1 class="m1">Listening<hr color=""></h1></a>
+    </center>
+    <div class="box">
+        <form  class="search">
+
+            <div class="sel">
+                <input type="text" id="searchReciter" placeholder="Search for Reciter">
+                <label for="chooseReciter">Choose Reciter</label>
+                <select id="chooseReciter"></select>
+                <button id="toggleReciter">🔍</button>
+
+                <input type="text" id="searchMoshaf" placeholder="Search for Narration">
+                <label for="chooseMoshaf">Choose Narration</label>
+                <select id="chooseMoshaf"> </select>
+                <button id="toggleMoshaf" style="visibility: hidden;">🔍</button>
+
+                <input type="text" id="searchSurah" placeholder="Search for Surah">
+                <label for="chooseSurah">Choose Surah</label>
+                <select id="chooseSurah"></select>
+                <button id="toggleSurah">🔍</button>
+            </div>
+
+            <audio id="audioPlayer" controls autoplay>
+                <source src="" type="audio/mpeg">
+                <source src="" type="audio/ogg">
+                Your browser does not support the audio element.
+            </audio>
+
+        </form>
+    </div>
+
+    
+    <script src="../js/main.js"></script>
+    <script src="../js/serach.js"></script>
+    <script src="../js/quranEn.js"></script>
+    <script src="../js/hide.js"></script>
+
+</body>
+</html>

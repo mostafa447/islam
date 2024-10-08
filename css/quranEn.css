@@ -1,0 +1,155 @@
+@font-face {
+    font-family: 'SegoeIM';
+    src: url(../font/SEGOEUI.TTF);
+    font-style: normal;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: SegoeIM;
+    direction: ltr;
+}
+
+
+body {
+    background-image: url(../imgs/Quran_background.png);
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: 1500px 600px;
+    background-color: #fff;
+}
+
+
+audio {
+    margin-top: 50px;
+    width: 100%;
+}
+
+/* تنسيق الوضع الداكن للعناصر */
+.dark audio {
+    margin-top: 50px;
+    width: 100%;
+}
+
+
+/* تنسيق صندوق البحث */
+.search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 150px 120px;
+    background-color: rgb(234, 230, 225);
+    padding: 20px 20px 50px 20px;
+    border-radius: 20px;
+    color: black;
+}
+
+.dark .search {
+    background-color: rgb(74, 71, 68);
+    border: 1px solid #222;
+    color: #fff;
+}
+
+/* تنسيق الحقول */
+.sel {
+    display: flex;
+    flex-direction: column; /* ترتيب العناصر بشكل عمودي */
+    gap: 10px;
+    width: 70%;
+    margin: 10px auto;
+    background-color: rgb(234, 230, 225);
+    border-radius: 20px;
+}
+
+.dark .sel {
+    background-color: rgb(74, 71, 68);
+}
+
+.sel label {
+    margin-right: 5px;
+    font-size: 20px;
+}
+
+/* تنسيق الحقول والنصوص */
+.sel select {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    border-radius: 30px;
+}
+
+.sel input[type="text"] {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    border-radius: 30px;
+}
+
+/* تنسيق الأزرار */
+.sel button {
+    padding: 5px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sel button:hover {
+    background-color: #e0e0e0;
+}
+
+.dark .sel button {
+    background-color: #222;
+}
+
+.m1 {
+    margin: 60px 65px;
+    color: rgb(220, 14, 76);
+    font-weight: bolder;
+    font-style: italic;
+    letter-spacing: 5px;
+    display: inline-block;
+    transform: scale(1.5);
+}
+
+/* تكوين الحقول داخل صندوق البحث */
+.search div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sel input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.dark #searchReciter, .dark #searchMoshaf, .dark #searchSurah {
+    width: calc(100% - 30px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    background-color: #222;
+    color: #fff;
+}
+
+.search input[type="text"]::placeholder {
+    text-align: center;
+}
+
+.search audio {
+    width: 100%;
+    margin-top: 20px;
+}
