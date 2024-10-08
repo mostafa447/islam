@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>الاستماع</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../imgs/quran_ico/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../imgs/quran_ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../imgs/quran_ico/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/navRes.css">
+    <link rel="stylesheet" href="../css/quran.css">
+    <link rel="stylesheet" href="../css/quranRes.css">
+
+    <script src="../js/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<body dir="rtl">
+    <div class="navbar-container">
+        <div class="DropDwonMenu">
+            <div class="menu-toggle">
+                <input type="checkbox" id="menu-check">
+                <label for="menu-check" class="menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+            </div>
+            <br>
+            <nav class="navbar" id="nav">
+                <ul class="nav-links">
+                    <li class="nav-link services" id="quran">
+                        <a href="../ar/quran.html">القرآن
+                            <span class="material-icons dropdown-icon"></span>
+                        </a>
+                        <ul class="drop-down drop-down-quran"></ul>
+                    </li>
+                    <li class="nav-link" id="living">
+                        <a href="../ar/live.html" style="color: red; position: relative;">
+                            <span class="red-dot"></span>
+                            بث مباشر
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="../ar/radio.html" style="color: red; position: relative;">
+                            <div class="radio-container">
+                                <span class="radio-waves">
+                                    <span class="circle"></span>
+                                    <span class="wave"></span>
+                                    <span class="wave wave2"></span>
+                                    <span class="wave wave3"></span>
+                                </span>
+                                <span class="radio-text">راديو</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-link services" id="language">
+                        <a>اللغة
+                            <span class="material-icons dropdown-icon">
+                                arrow_drop_down
+                            </span>
+                        </a>
+                        <ul class="drop-down drop-down-language">
+                            <li>عربي</li>
+                            <li><a href="../en/quran.html">English</a></li>
+                        </ul>
+                    </li>
+                    <div class="mode">
+                        <span class="change">
+                            <img src="../imgs/moon.png" alt="Moon">
+                        </span>
+                    </div>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+        <center>
+            <a href="../ar/quran.html"><h1 class="m1" >الاستماع<hr color=""></h1></a>
+        </center>
+
+        <form  class="search">
+            <div class="sel">
+                <input type="text" id="searchReciter" placeholder="البحث عن القارئ">
+                <label for="chooseReciter">اختر القارئ</label>
+                <select id="chooseReciter"> <!--option value="">اختر القارئ</option--> </select>
+                <button id="toggleReciter">🔍</button> <!-- زر التبديل -->
+
+                <input type="text" id="searchMoshaf" placeholder="البحث عن الرواية">
+                <label for="chooseMoshaf">اختر الرواية</label>
+                <select id="chooseMoshaf"></select>
+                <button id="toggleMoshaf" style="visibility: hidden;">🔍</button>
+
+                <input type="text" id="searchSurah" placeholder="البحث عن السورة">
+                <label for="chooseSurah">اختر السورة</label>
+                <select id="chooseSurah"></select>
+                <button id="toggleSurah">🔍</button>
+            </div>
+
+            <audio id="audioPlayer" controls autoplay>
+                <source src="" type="audio/mpeg">
+                <source src="" type="audio/ogg">
+                Your browser does not support the audio element.
+            </audio>
+        </form>
+    
+    <script src="../js/quran.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/serach.js"></script>
+    <script src="../js/hide.js"></script>
+</body>
+</html>
