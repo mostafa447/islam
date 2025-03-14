@@ -1,80 +1,101 @@
-const apiUrl = 'https://mp3quran.net/api/v3';
-const language = 'eng';
-
-
-chooseReciter.innerHTML = `<option value="">Choose Reciter</option>`; 
-
-async function getReciters() {
+document.addEventListener("DOMContentLoaded", async () => {
     const chooseReciter = document.querySelector('#chooseReciter');
-    const res = await fetch(`${apiUrl}/reciters?language=${language}`);
-    const data = await res.json();
-    console.log(data);
-    chooseReciter.innerHTML = `<option value="">Choose Reciter</option>`; 
-    data.reciters.forEach(reciter => chooseReciter.innerHTML += `<option value="${reciter.id}">${reciter.name}</option>`);
-    chooseReciter.addEventListener('change', e => getMoshaf(e.target.value));
-}
-getReciters();
-
-
-chooseMoshaf.innerHTML = `<option value="" data-server="" data-surah-list="">Choose Recitation</option>`; // الترجمة إلى الإنجليزية
-
-
-async function getMoshaf(reciter) {
     const chooseMoshaf = document.querySelector('#chooseMoshaf');
-
-    const res = await fetch(`${apiUrl}/reciters?language=${language}&reciter=${reciter}`);
-    const data = await res.json();
-    const moshafs = data.reciters[0].moshaf;
-
-    chooseMoshaf.innerHTML = `<option value="" data-server="" data-surah-list="">Choose Recitation</option>`; // الترجمة إلى الإنجليزية
-
-    moshafs.forEach(moshaf => { 
-        chooseMoshaf.innerHTML += `<option value="${moshaf.id}" data-server="${moshaf.server}" data-surah-list="${moshaf.surah_list}">${moshaf.name}</option>`;
-    });
-
-    chooseMoshaf.addEventListener('change', e => {
-        const selectedMoshaf = chooseMoshaf.options[chooseMoshaf.selectedIndex];
-        const surahServer = selectedMoshaf.dataset.server;
-        const surahList = selectedMoshaf.dataset.surahList;
-        getSurah(surahServer, surahList);
-    });
-}
-
-chooseSurah.innerHTML = `<option value="">Choose Surah</option>`
-
-async function getSurah(surahServer, surahList) {
     const chooseSurah = document.querySelector('#chooseSurah');
-
-    console.log(surahServer);
-
-    const res = await fetch(`https://mp3quran.net/api/v3/suwar?language=${language}`);
-    const data = await res.json();
-
-    console.log(surahList);
-    const surahNames = data.suwar;
-
-    surahList = surahList.split(',');
-
-    chooseSurah.innerHTML = `<option value="">Choose Surah</option>`; // الترجمة إلى الإنجليزية
-
-    surahList.forEach(surah => {
-        const padSurah = surah.padStart(3, '0');
-
-        surahNames.forEach(surahName => {
-            if (surahName.id == surah) {
-                chooseSurah.innerHTML += `<option value="${surahServer}${padSurah}.mp3">${surahName.name}</option>`;
-            }
-        });
-    });
-
-    chooseSurah.addEventListener('change', e => {
-        const selectedSurah = chooseSurah.options[chooseSurah.selectedIndex]; // Fixing the variable reference
-        playSurah(selectedSurah.value);
-    });
-}
-
-function playSurah(surahMp3) {
     const audioPlayer = document.querySelector('#audioPlayer');
-    audioPlayer.src = surahMp3;
-    audioPlayer.play();
-}
+
+    if (!chooseReciter || !chooseMoshaf || !chooseSurah || !audioPlayer) {
+        console.error("Error: Selection elements not found.");
+        return;
+    }
+
+    chooseReciter.innerHTML = `<option value="">Choose Reciter</option>`;
+    chooseMoshaf.innerHTML = `<option value="">Choose Edition</option>`;
+    chooseSurah.innerHTML = `<option value="">Choose Surah</option>`;
+
+    // ✅ Fetch reciters and convert Arabic names to English
+    async function getReciters() {
+        try {
+            const res = await fetch("http://api.alquran.cloud/v1/edition?format=audio");
+            if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+            
+            const data = await res.json();
+            const reciters = data.data;
+            
+            reciters.forEach(reciter => {
+                const englishName = reciter.englishName || reciter.name;
+                chooseReciter.innerHTML += `<option value="${reciter.identifier}" data-type="${reciter.type}">${englishName}</option>`;
+            });
+        } catch (error) {
+            console.error("❌ Error fetching reciters:", error);
+        }
+    }
+
+    await getReciters();
+
+    // ✅ Update editions based on selected reciter
+    chooseReciter.addEventListener("change", async (e) => {
+        const reciterId = e.target.value;
+        if (!reciterId) return;
+
+        chooseMoshaf.innerHTML = `<option value="">Choose Edition</option>`;
+        
+        try {
+            const res = await fetch("http://api.alquran.cloud/v1/edition?format=audio");
+            if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+            
+            const data = await res.json();
+            const reciterEditions = data.data.filter(edition => edition.identifier === reciterId);
+            
+            reciterEditions.forEach(edition => {
+                chooseMoshaf.innerHTML += `<option value="${edition.identifier}">${edition.englishName}</option>`;
+            });
+        } catch (error) {
+            console.error("❌ Error fetching editions:", error);
+        }
+    });
+
+    // ✅ Fetch surahs with English names only
+    async function getSurahs() {
+        try {
+            const res = await fetch("http://api.alquran.cloud/v1/quran/en.asad");
+            if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+            
+            const data = await res.json();
+            const surahs = data.data.surahs;
+            
+            surahs.forEach(surah => {
+                chooseSurah.innerHTML += `<option value="${surah.number}">${surah.englishName}</option>`;
+            });
+        } catch (error) {
+            console.error("❌ Error fetching surahs:", error);
+        }
+    }
+
+    await getSurahs();
+
+    // ✅ Play selected surah
+    chooseSurah.addEventListener('change', async (e) => {
+        const surahNumber = e.target.value;
+        const moshafId = chooseMoshaf.value;
+        if (!surahNumber || !moshafId) return;
+
+        try {
+            const res = await fetch(`http://api.alquran.cloud/v1/quran/${moshafId}`);
+            if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+            
+            const data = await res.json();
+            const surahData = data.data.surahs.find(s => s.number == surahNumber);
+            if (!surahData) {
+                console.error("❌ Surah not found!");
+                return;
+            }
+            
+            const audioUrl = surahData.ayahs[0].audio;
+            audioPlayer.src = audioUrl;
+            audioPlayer.play();
+        } catch (error) {
+            console.error("❌ Error playing surah:", error);
+        }
+    });
+});

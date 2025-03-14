@@ -1,84 +1,105 @@
-const apiUrl = 'https://mp3quran.net/api/v3';
-const language = 'ar';
-
-chooseReciter.innerHTML = `<option value="">اختر قارئ</option>`
-
-async function getReciters() {
+document.addEventListener("DOMContentLoaded", async () => {
+    const language = 'ar';
     const chooseReciter = document.querySelector('#chooseReciter');
-    const res = await fetch(`${apiUrl}/reciters?language=${language}`);
-    const data = await res.json();
-    console.log(data);
-    data.reciters.forEach(reciter => chooseReciter.innerHTML += `<option value="${reciter.id}">${reciter.name}</option>`);
-    chooseReciter.addEventListener('change', e => getMoshaf(e.target.value))
-}
-getReciters()
-
-
-chooseMoshaf.innerHTML = `<option value="" data-server="" data-surah-list="">اختر الرواية</option>`;
-
-async function getMoshaf(reciter) {
-    
     const chooseMoshaf = document.querySelector('#chooseMoshaf');
-
-    const res = await fetch(`${apiUrl}/reciters?language=${language}&reciter=${reciter}`);
-    const data = await res.json();
-    const moshafs = data.reciters[0].moshaf;
-
-    chooseMoshaf.innerHTML = `<option value="" data-server="" data-surah-list="">اختر الرواية</option>`;
-
-    moshafs.forEach(moshaf => { 
-        chooseMoshaf.innerHTML += `<option value="${moshaf.id}" data-server="${moshaf.server}" data-surah-list="${moshaf.surah_list}">${moshaf.name}</option>`; 
-    });
-
-    
-    chooseMoshaf.addEventListener('change', e => {
-        const selectedMosfah = chooseMoshaf.options[chooseMoshaf.selectedIndex]
-        const surahServer = selectedMosfah.dataset.server;
-        const surahList = selectedMosfah.dataset.surahList;
-        getSurah(surahServer, surahList)
-    });
-}
-
-
-chooseSurah.innerHTML = `<option value="">اختر السورة</option>`;
-
-async function getSurah(surahServer, surahList) {
     const chooseSurah = document.querySelector('#chooseSurah');
+    const audioPlayer = document.querySelector('#audioPlayer');
 
-    console.log(surahServer);
+    if (!chooseReciter || !chooseMoshaf || !chooseSurah || !audioPlayer) {
+        console.error("خطأ: لم يتم العثور على عناصر الاختيار.");
+        return;
+    }
 
-
-    const res = await fetch(`https://mp3quran.net/api/v3/suwar`)
-    const data = await res.json()
-
-    console.log(surahList);
-    const surahNames = data.suwar;
-
-    surahList = surahList.split(',')
+    chooseReciter.innerHTML = `<option value="">اختر القارئ</option>`;
+    chooseMoshaf.innerHTML = `<option value="">اختر الرواية</option>`;
     chooseSurah.innerHTML = `<option value="">اختر السورة</option>`;
 
+    // ✅ 1. جلب جميع القرّاء باللغة العربية فقط
+    async function getReciters() {
+        try {
+            const res = await fetch("http://api.alquran.cloud/v1/edition?format=audio&language=ar");
+            if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+            
+            const data = await res.json();
+            const reciters = data.data;
+            
+            reciters.forEach(reciter => {
+                chooseReciter.innerHTML += `<option value="${reciter.identifier}">${reciter.name}</option>`;
+            });
+        } catch (error) {
+            console.error("❌ خطأ في جلب القرّاء:", error);
+        }
+    }
 
-    surahList.forEach(surah => {
-        const padSurah = surah.padStart(3, '0')
+    await getReciters();
 
-        surahNames.forEach(surahName => {
-            if (surahName.id == surah) {
-                chooseSurah.innerHTML += `<option value="${surahServer}${padSurah}.mp3">${surahName.name}</option>`;
+    // ✅ 2. تحديث الروايات وإعادة تعيين اختيار السورة عند تغيير القارئ
+    chooseReciter.addEventListener("change", async (e) => {
+        const reciterId = e.target.value;
+        if (!reciterId) return;
+
+        chooseMoshaf.innerHTML = `<option value="">اختر الرواية</option>`;
+        chooseSurah.innerHTML = `<option value="">اختر السورة</option>`;
+        
+        try {
+            const res = await fetch("http://api.alquran.cloud/v1/edition?format=audio&language=ar");
+            if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+            
+            const data = await res.json();
+            const reciterEditions = data.data.filter(edition => edition.identifier === reciterId);
+            
+            reciterEditions.forEach(edition => {
+                chooseMoshaf.innerHTML += `<option value="${edition.identifier}">${edition.name}</option>`;
+            });
+        } catch (error) {
+            console.error("❌ خطأ في جلب الروايات:", error);
+        }
+    });
+
+    // ✅ 3. تحديث السور عند اختيار الرواية
+    chooseMoshaf.addEventListener("change", async (e) => {
+        const moshafId = e.target.value;
+        if (!moshafId) return;
+
+        chooseSurah.innerHTML = `<option value="">اختر السورة</option>`;
+
+        try {
+            const res = await fetch(`http://api.alquran.cloud/v1/quran/${moshafId}`);
+            if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+            
+            const data = await res.json();
+            const surahs = data.data.surahs;
+            
+            surahs.forEach(surah => {
+                chooseSurah.innerHTML += `<option value="${surah.number}">${surah.name}</option>`;
+            });
+        } catch (error) {
+            console.error("❌ خطأ في جلب السور:", error);
+        }
+    });
+
+    // ✅ 4. تشغيل السورة المختارة بناءً على القارئ والرواية المختارين
+    chooseSurah.addEventListener('change', async (e) => {
+        const surahNumber = e.target.value;
+        const moshafId = chooseMoshaf.value;
+        if (!surahNumber || !moshafId) return;
+
+        try {
+            const res = await fetch(`http://api.alquran.cloud/v1/quran/${moshafId}`);
+            if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+            
+            const data = await res.json();
+            const surahData = data.data.surahs.find(s => s.number == surahNumber);
+            if (!surahData) {
+                console.error("❌ السورة غير موجودة!");
+                return;
             }
-        });
+            
+            const audioUrl = surahData.ayahs[0].audio;
+            audioPlayer.src = audioUrl;
+            audioPlayer.play();
+        } catch (error) {
+            console.error("❌ خطأ في تشغيل السورة:", error);
+        }
     });
-
-    chooseSurah.addEventListener('change', e => {
-        const selectedSurah = chooseSurah.options[chooseSurah.selectedIndex]; // Fixing the variable reference
-        playSurah(selectedSurah.value);
-    });
-}
-
-
-function playSurah(surahMp3) {
-    const audioPlayer = document.querySelector('#audioPlayer');
-    audioPlayer.src = surahMp3
-    audioPlayer.play();
-}
-
-
+});
