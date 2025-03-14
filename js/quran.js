@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // ✅ 1. جلب جميع القرّاء باللغة العربية فقط
     async function getReciters() {
         try {
-            const res = await fetch("http://api.alquran.cloud/v1/edition?format=audio&language=ar");
+            const res = await fetch("https://api.alquran.cloud/v1/edition?format=audio&language=ar");
             if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
             
             const data = await res.json();
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         chooseSurah.innerHTML = `<option value="">اختر السورة</option>`;
         
         try {
-            const res = await fetch("http://api.alquran.cloud/v1/edition?format=audio&language=ar");
+            const res = await fetch("https://api.alquran.cloud/v1/edition?format=audio&language=ar");
             if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
             
             const data = await res.json();
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         chooseSurah.innerHTML = `<option value="">اختر السورة</option>`;
 
         try {
-            const res = await fetch(`http://api.alquran.cloud/v1/quran/${moshafId}`);
+            const res = await fetch(`https://api.alquran.cloud/v1/quran/${moshafId}`);
             if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
             
             const data = await res.json();
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!surahNumber || !moshafId) return;
 
         try {
-            const res = await fetch(`http://api.alquran.cloud/v1/quran/${moshafId}`);
+            const res = await fetch(`https://api.alquran.cloud/v1/quran/${moshafId}`);
             if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
             
             const data = await res.json();
